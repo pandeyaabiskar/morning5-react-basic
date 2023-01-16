@@ -1,0 +1,9 @@
+.title{
+    text-align: center;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+}
