@@ -1,9 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
+import Input from "../../components/Input"
 
 function TodoLayout() {
   const [todos, setTodos] = useState([]);
   const [todoText, setTodoText] = useState("");
+
+  //useEffect Hook
+  
+  //1. Runs below function on all updates to the page
+  // useEffect(() => {
+  //   console.log("Component mounted")
+  // })
+
+  //2. Runs only after mounting of the component
+  // useEffect(() => {
+  //   console.log("Component mounted")
+  // }, [])
+
+  //3. Runs on update of dependent state
+  useEffect(() => {
+    console.log("Component mounted")
+
+    //Runs the return function when the component is unmounted
+    return () => {
+      console.log("Component unmounted")
+    }
+  }, [todos])
+
+
 
   const handleInput = () => {
     setTodos((prev) => [...prev, todoText]);
@@ -18,19 +43,13 @@ function TodoLayout() {
     <>
       <h1>Todo Application</h1>
       <div>
-        <input
-          id="todo-input"
-          type="text"
-          value={todoText}
-          onChange={(e) => handleInputText(e)}
-        ></input>
-        {/* <Button label="Add" handleClick={handleInput} /> */}
+        <Input value={todoText} onChange={handleInputText} />
         <Button onClick={handleInput}>Add</Button>
       </div>
       <div>
         <ul>
-          {todos.map((todo) => {
-            return <li>{todo}</li>;
+          {todos.map((todo, index) => {
+            return <li key={index}>{todo}</li>;
           })}
         </ul>
       </div>

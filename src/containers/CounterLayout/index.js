@@ -1,20 +1,30 @@
 import './counterlayout.css'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 function CounterLayout() {
-  // let count = 0;
   const [count, setCount] = useState(0);
 
   const decreaseValue = () => {
-    // count--;
     setCount(prev => prev - 1)
-    console.log(count)
   }
   const increaseValue = () => {
-    // count++;
     setCount(prev => prev + 1)
-    console.log(count)
   }
+
+  //Set a 5 sec timer to reset the counter
+  useEffect(() => {
+    if (count === 0) return;
+    console.log("Timer set")
+    let id = setTimeout(() => {
+      console.log("Timeout completed")
+      setCount(0)
+    }, 5000)
+
+    return () => {
+      console.log("Timer destroyed")
+      clearTimeout(id)
+    }
+  }, [count])
 
   return (
     <>
