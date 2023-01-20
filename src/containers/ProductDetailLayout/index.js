@@ -1,28 +1,8 @@
 import "./productdetaillayout.css";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useFetch } from "../../hooks";
 
 function ProductDetailLayout() {
-  const [productData, setProductData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  // Fetch data from server
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:4000/api/products/63b4eb94a5a3cc7076eec87b"
-        );
-        setProductData(data);
-        setIsLoading(false);
-      } catch (err) {
-        setIsLoading(false);
-        setIsError(true);
-      }
-    };
-    fetchData();
-  }, []);
+  const { productData, isLoading, isError } = useFetch("http://localhost:4000/api/products/63b4eb94a5a3cc7076eec87b");
 
   return (
     <>
