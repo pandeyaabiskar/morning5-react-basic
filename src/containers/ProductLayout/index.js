@@ -1,6 +1,7 @@
 import "./productlayout.css";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
+import {Link} from 'react-router-dom'
 
 function ProductLayout() {
   const [url, setUrl] = useState(process.env.REACT_APP_BASE_URL);
@@ -46,7 +47,7 @@ function ProductLayout() {
           productData.map((product) => {
             return (
               <div className="product-card" key={product._id}>
-                <a href="/details.html">
+                <Link to={`/products/${product._id}`}>
                   <div className="product-image">
                     <img src={product.image} />
                   </div>
@@ -54,7 +55,7 @@ function ProductLayout() {
                     <h5>{product.title}</h5>
                     <h6>${product.price}</h6>
                   </div>
-                </a>
+                </Link>
               </div>
             );
           })}
