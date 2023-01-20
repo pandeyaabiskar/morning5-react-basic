@@ -3,15 +3,15 @@ import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
 
 function ProductLayout() {
-  const [url, setUrl] = useState("http://localhost:4000/api/products");
+  const [url, setUrl] = useState(process.env.REACT_APP_BASE_URL);
   const [category, setCategory] = useState(null);
   const { productData, isLoading, isError } = useFetch(url);
 
   useEffect(() => {
     if (category) {
-      setUrl(`http://localhost:4000/api/products?category=${category}`);
+      setUrl(`${process.env.REACT_APP_BASE_URL}?category=${category}`);
     } else {
-      setUrl("http://localhost:4000/api/products");
+      setUrl(process.env.REACT_APP_BASE_URL);
     }
   }, [category]);
 
@@ -25,6 +25,7 @@ function ProductLayout() {
         <div class="collection-sort">
           <label>Filter by:</label>
           <select onChange={handleCategory}>
+            <option value="">All</option>
             <option value="electronics">Electronics</option>
             <option value="jewelery">Jewelery</option>
             <option value="men's clothing">Men's clothing</option>

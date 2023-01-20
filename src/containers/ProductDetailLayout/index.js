@@ -1,8 +1,10 @@
 import "./productdetaillayout.css";
 import { useFetch } from "../../hooks";
+import {useParams} from 'react-router-dom'
 
 function ProductDetailLayout() {
-  const { productData, isLoading, isError } = useFetch("http://localhost:4000/api/products/63b4eb94a5a3cc7076eec87b");
+  const {productID} = useParams();
+  const { productData, isLoading, isError } = useFetch(`http://localhost:4000/api/products/${productID}`);
 
   return (
     <>
