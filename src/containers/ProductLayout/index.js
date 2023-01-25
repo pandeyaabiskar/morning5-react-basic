@@ -1,24 +1,41 @@
 import "./productlayout.css";
 import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllData } from "../../store/slices/productSlice";
+//Context
+import { useContext } from "react";
+import { ProductContext } from "../../context/ProductContext";
 
 function ProductLayout() {
-  const [url, setUrl] = useState(process.env.REACT_APP_BASE_URL);
+  // const [url, setUrl] = useState(process.env.REACT_APP_BASE_URL);
   const [category, setCategory] = useState(null);
-  const { productData, isLoading, isError } = useFetch(url);
+  // const { productData, isLoading, isError } = useFetch(url);
 
-  useEffect(() => {
-    if (category) {
-      setUrl(`${process.env.REACT_APP_BASE_URL}?category=${category}`);
-    } else {
-      setUrl(process.env.REACT_APP_BASE_URL);
-    }
-  }, [category]);
+  //Redux
+  // const dispatch = useDispatch();
+  // const { productData, isLoading, isError } = useSelector(
+  //   (store) => store.product
+  // );
+  // useEffect(() => {
+  //   dispatch(fetchAllData());
+  // }, []);
+
+  // useEffect(() => {
+  //   if (category) {
+  //     dispatch(fetchAllData(category));
+  //   } else {
+  //     dispatch(fetchAllData());
+  //   }
+  // }, [category]);
+
+  //Context
+  const {productData, isLoading, isError} = useContext(ProductContext)
 
   const handleCategory = (e) => {
-    setCategory(e.target.value)
-  }
+    setCategory(e.target.value);
+  };
 
   return (
     <>
